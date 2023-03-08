@@ -1,5 +1,7 @@
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class Wall implements Structure{
     /*
@@ -10,16 +12,21 @@ public class Wall implements Structure{
 
     @Override
     public Optional<Block> findBlockByColor(String color) {
-        return Optional.empty();
+        return blocks.stream()
+                .filter(n -> n.getColor().equals(color))
+                .findAny();
     }
 
     @Override
     public List<Block> findBlocksByMaterial(String material) {
-        return null;
+        return blocks.stream()
+                .filter(n -> n.getMaterial().equals(material))
+                .collect(Collectors.toList());
     }
 
     @Override
     public int count() {
-        return 0;
+        return blocks.size();
     }
+
 }
